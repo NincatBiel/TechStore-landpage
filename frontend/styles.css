@@ -1,0 +1,17 @@
+/*================= Import ================*/
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap');
+
+/*================= Root =================*/
+:root{
+    --dark-background: #333333; 
+    --light-background: #FFFFFF;
+    --card-background: #EEEEEE;
+    --button-nav-title-color: #004A9D;
+}
+
+
+/*================= Body =================*/
+body{
+    font-family: 'Open Sans',sans-serif;
+    
+}
