@@ -1,73 +1,87 @@
-const apiUrl = 'http://localhost:3000/'; //o que seria aqui?
+const apiUrl = 'http://localhost:3000/emailadd'; //o que seria aqui?
 
 const form = document.getElementById('form-inscricao');
 
+// POST do input ao db
 form.addEventListener('submit', async(e) => {
     e.preventDefault();
 
     const email = document.getElementById('email').value;
 
     try{
+        const res = await fetch(apiUrl, {
+            method:'POST',
+            headers: {'Content-Type':'application/json'},
+            body: JSON.stringify({email})
+        });
+
+        if (!res.ok) throw new Error('Erro ao enviar o e-mail!');
+         
+        // const emailadd = await res.json();
+
+        form.reset();
 
     }catch (err) {
-        alert('Erro ao salvar tarefa: ' + err.message)
+        alert('Erro ao enviar o email: ' + err.message)
     }
 
 });
 
+// Adição de cards
+function createCard(product){
+    const productList = document.getElementById('produtos-lista');
+    const card = document.createElement('li');
 
-// factory e objetos
+    card.innerHTML = `
+    <div class="card">
+        <img class="card-imagem" src="" alt="img">
+        <p>${product.nome}</p>
+        <p>${product.descricao}</p>
+        <p>${product.preco}</p>
+        <button>Detalhes</button>
+    </div>
+    `;
+    // document.querySelector(".card-imagem").src = product.imagem;
+    
+    productList.appendChild(card)
 
-// factory atraves de class (provavelmente eu vou usar)
-class createProduct{
-    constructor(id,nome,descricao,preco,imagem){
-        this.id = id;
-        this.nome = nome;
-        this.descricao = descricao;
-        this.preco = preco;
-        this.imagem = imagem;
-    }
+};
 
-}
+/* imagem variavel, testar em casa
+var imgVar = "https://www.jqueryscript.net/images/Simplest-Responsive-jQuery-Image-Lightbox-Plugin-simple-lightbox.jpg";
+document.querySelector(".id-of-img-tag").src = imgVar;
+<img class="id-of-img-tag" src="" alt="img">
+*/
 
-const fone = new 
-const smartwatch = new
-const camera = new
+// factory
 
+function createProduct (id, nome, descricao, preco, imagem){
+    const product = {
+        id: id,
+        nome: nome,
+        descricao: descricao,
+        preco: preco,
+        imagem: imagem
+    };
 
-// factory atraves de function
-function createProduct(id,nome,descricao,preco,imagem){
+    return product;
+};
 
-
-}
+// imagens
+const foneImagem = "https://images.kabum.com.br/produtos/fotos/sync_mirakl/498842/xlarge/Fone-de-Ouvido-Gamer-Lenovo-Think-Livepods-Gm2-Pro-Bluetooth-Preto_1790620748.png";
+const smartwatchImagem = "https://cdn.mos.cms.futurecdn.net/FkGweMeB7hdPgaSFQdgsfj-970-80.jpg.webp";
+const cameraImagem = "https://pro.sony/s3/2025/01/12102234/1000x700.png";
 
 // objetos
-[
-{
-"id": 1,
-"nome": "Fone Bluetooth Premium",
-"descricao": "Fone de ouvido sem fio com qualidade de som excelente",
-"preco": 199.90,
-"imagem":
-"https://grupomateus.vtexassets.com/arquivos/ids/4277626-1200-1200?v=638894764984400000&widt
-h=1200&height=1200&aspect=true"
-},
-
-{
-"id": 2,
-"nome": "Smartwatch Inteligente",
-"descricao": "Relógio inteligente com monitor de saúde e notificações",
-"preco": 349.90,
-"imagem": "https://cdn.mos.cms.futurecdn.net/FkGweMeB7hdPgaSFQdgsfj-970-80.jpg.webp"
-},
-{
-"id": 3,
-"nome": "Câmera Profissional HD",
-"descricao": "Câmera Sony profissional com resolução Full HD e zoom digital",
-"preco": 4999.90,
-"imagem": "https://pro.sony/s3/2025/01/12102234/1000x700.png"
-}
-]
+const fone = createProduct(1, "Fone Bluetooth Premium", "Fone de ouvido sem fio com qualidade de som excelente", 199.90, foneImagem);
+const smartwatch = createProduct(2,"Smartwatch Inteligente", "Relógio inteligente com monitor de saúde e notificações", 349.90, smartwatchImagem);
+const camera = createProduct(3,"Câmera Profissional HD", "Câmera Sony profissional com resolução Full HD e zoom digital", 4999.90, cameraImagem);
 
 
-// link da foto do fone https://images.kabum.com.br/produtos/fotos/sync_mirakl/498842/xlarge/Fone-de-Ouvido-Gamer-Lenovo-Think-Livepods-Gm2-Pro-Bluetooth-Preto_1790620748.png
+
+const produtos = [fone, smartwatch, camera];
+
+
+for ( let i = 0; i < produtos.length; i++) {
+    createCard(produtos[i]);
+};
