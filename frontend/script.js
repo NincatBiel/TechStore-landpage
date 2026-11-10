@@ -31,17 +31,18 @@ form.addEventListener('submit', async(e) => {
 function createCard(product){
     const productList = document.getElementById('produtos-lista');
     const card = document.createElement('li');
-
+    
     card.innerHTML = `
     <div class="card">
-        <img class="card-imagem" src="" alt="img">
+    <img class="card-imagem" src="${product.imagem}" alt="img">
         <p>${product.nome}</p>
         <p>${product.descricao}</p>
         <p>${product.preco}</p>
         <button>Detalhes</button>
     </div>
     `;
-    // document.querySelector(".card-imagem").src = product.imagem;
+
+    // document.querySelectorAll(".card-image").src = product.imagem; // resultado, n precisei, mas ta aqui, pra informar
     
     productList.appendChild(card)
 
